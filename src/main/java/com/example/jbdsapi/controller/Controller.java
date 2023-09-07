@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
+
 
 @RestController
 @RequestMapping("products")
@@ -18,6 +20,9 @@ public class Controller {
     @GetMapping("/fetch-product")
     public String getProduct(@RequestParam String name){
         return baseConnectRepository.getProductName(name).toString();
+
     }
+
+
 
 }
