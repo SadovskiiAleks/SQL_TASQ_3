@@ -18,25 +18,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
-//@RequiredArgsConstructor
 public class BaseConnectRepository {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final String sqlFile = "ScriptToFindToName.sql";
-    public List<String> getProductName(String name){
-//        String sql1 = "select product_name from orders\n" +
-//                "join custumers ON custumers.id = orders.costumer_id \n" +
-//                "where lower(custumers.name)  = lower(name := name);";
 
-
-        String sql2= "select product_name from orders\n" +
+    public List<String> getProductName(String name) {
+        String sql = "select product_name from orders\n" +
                 "join custumers ON custumers.id = orders.costumer_id \n" +
-                "where lower(custumers.name)  = 'alexey';";
-
-        final List<String> productsWithNamed = jdbcTemplate.queryForList(sql2, String.class);
-        return productsWithNamed ;
+                "where lower(custumers.name) = lower(:name);";
+        final List<String> productsWithNamed = namedParameterJdbcTemplate.queryForList(
+                sql, new MapSqlParameterSource("name", name), String.class);
+        return productsWithNamed;
     }
 
     private static String read(String scriptFileName) {
