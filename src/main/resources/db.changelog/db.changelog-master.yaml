@@ -5,9 +5,9 @@ databaseChangeLog:
   - include:
       file: migration/schema_2.sql
       relativeToChangelogFile: true
-#  - include:
-#      file: migration/data_1.sql
-#      relativeToChangelogFile: true
-#  - include:
-#      file: migration/data_2.sql
-#      relativeToChangelogFile: true
+  - include:
+      file: migration/data_1.sql
+      relativeToChangelogFile: true
+  - include:
+      file: migration/data_2.sql
+      relativeToChangelogFile: true
